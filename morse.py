@@ -1,4 +1,6 @@
 import unicodedata #handling accents
+import time 
+from playsound import playsound 
 
 #I made the morse code alphabet + numbers a dictionary for optimization purposes (better than an array, I guess).
 MORSE_DICT = {'a':'.- ', 'b':'-... ', 'c':'-.-. ', 'd':'-.. ', 'e':'. ', 'f':'..-. ',
@@ -9,12 +11,12 @@ MORSE_DICT = {'a':'.- ', 'b':'-... ', 'c':'-.-. ', 'd':'-.. ', 'e':'. ', 'f':'..
               '5':'..... ', '6':'-.... ', '7':'--... ', '8':'---.. ', '9':'----. ', '0':'----- '
               }
 
-
 def cleanText(text: str) -> str:
     """
     I could use unidecode, but it would be another dependence, since unicodedata comes on the Python standard library. By default, strings in Python are Unicode.
     Unicode has multiple ways to normalize a unicode string.
     """
+    
     return unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
 
 def morseIt(text: str) -> str:
@@ -45,7 +47,7 @@ def unmorseIt(text: str) -> str:
     morse_dict_inverted = {v: k for k, v in MORSE_DICT.items()}
 
     full_text = "" #the plain text that'll be returned
-    stack = "" #helper variable that stacks the dots and hyphens (a letter can correspond to more than 1 dot or hyphen)
+    stack = "" #helper variable that stacks the dots and hyphens (a letter can correspond to more than 1 dot or dash)
 
     for letter in text:
         if(letter == ' '): #when we reach a space, we got all the morse that corresponds to a single letter
@@ -61,3 +63,16 @@ def unmorseIt(text: str) -> str:
 
     return full_text
 
+def playMorse(code: str):
+    """
+    Plays the morse code. Cross-platform compatibility, thanks to TaylorSMarks! His module is at https://github.com/TaylorSMarks/playsound
+
+    :param str code: The code to be played on the system.
+    """
+    for i in code:
+        if(i == '.'):
+            playsound('dot.wav')
+        elif(i == '-'):
+            playsound('dash.wav')
+        else:
+            time.sleep(0.3)
