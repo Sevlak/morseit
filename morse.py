@@ -16,7 +16,7 @@ def cleanText(text: str) -> str:
     I could use unidecode, but it would be another dependence, since unicodedata comes on the Python standard library. By default, strings in Python are Unicode.
     Unicode has multiple ways to normalize a unicode string.
     """
-    
+
     return unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
 
 def morseIt(text: str) -> str:
@@ -65,7 +65,7 @@ def unmorseIt(text: str) -> str:
 
 def playMorse(code: str):
     """
-    Plays the morse code. Cross-platform compatibility, thanks to TaylorSMarks! His module is at https://github.com/TaylorSMarks/playsound
+    Plays the morse code. Cross-platform compatibility, thanks to TaylorSMarks! 
 
     :param str code: The code to be played on the system.
     """

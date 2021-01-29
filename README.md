@@ -1,4 +1,6 @@
 # morseit
 Simple text to morse converter.
 
-I plan to add a morse to text function and some audio output :)
+I got the morse code sounds at morsecode.world
+
+I use the playsound [module](https://github.com/TaylorSMarks/playsound) too! 
